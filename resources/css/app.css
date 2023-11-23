@@ -1,0 +1,122 @@
+@import url(@fortawesome/fontawesome-free/css/all.css);
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components{
+    .navButton{
+        @apply text-emerald-600 font-extrabold hover:text-white hover:bg-gray-600  rounded-t-lg px-8 py-3
+    }
+    .navButtonActive{
+        @apply bg-gray-900 text-white
+    }
+    .navButtonNoHover{
+            @apply text-emerald-600 font-extrabold px-8 py-3 text-lg
+    }
+    th{
+        @apply px-2
+    }
+    td{
+        @apply px-2
+    }
+}
+
+@layer utilities {
+    /* Chrome, Safari and Opera */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+
+    .no-scrollbar {
+      -ms-overflow-style: none; /* IE and Edge */
+      scrollbar-width: none; /* Firefox */
+    }
+}
+
+
+.scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: #34d399 #030712;
+  }
+
+  /* Works on Chrome, Edge, and Safari */
+  .scrollbar::-webkit-scrollbar {
+    width: 12px;
+  }
+
+  .scrollbar::-webkit-scrollbar-track {
+    background: #030712;
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb {
+    background-color: #34d399;
+    border-radius: 20px;
+    border: 3px solid #030712;
+  }
+
+  .prevent-select {
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+  }
+
+
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 30px;
+  }
+
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #1e293b;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 22px;
+    width: 22px;
+    left: 4px;
+    bottom: 4px;
+    background-color: #0f172a;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+
+  input:checked + .slider {
+    background-color: #34d399;
+  }
+
+  input:focus + .slider {
+    box-shadow: 0 0 1px #1e293b;
+  }
+
+  input:checked + .slider:before {
+    -webkit-transform: translateX(22px);
+    -ms-transform: translateX(22px);
+    transform: translateX(22px);
+  }
+
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 34px;
+  }
+
+  .slider.round:before {
+    border-radius: 50%;
+  }
