@@ -1,24 +1,26 @@
+<!-- Contains the head tag and settings-->
 <x-head>
 </x-head>
 
+<!-- Contains the navbar-->
 <x-navbar>
 </x-navbar>
 
+<!--An alertbox stating successfull admin opertation -->
 @if (Session::has('adminOperation'))
 <x-alertbox primaryText="Success! " secondaryText="{!!Session::get('adminOperation')!!}">
 </x-alertbox>
 @endif
 
-
+<!-- The container for all the content on the page -->
 <div class="bg-gray-950 md:w-5/6 w-full m-auto mt-0 border-4 border-black">
 
     <h1 class="bg-emerald-400 text-black p-5 mb-1 text-2xl md:mb-2  "><i class="fa-solid fa-crown mr-5"
             style="color: #000000;"></i>Admin Panel
-
     </h1>
 
+    <!-- Statistics about the site -->
     <div class="flex flex-row flex-wrap justify-around text-white mt-2 md:mt-0">
-
         <span>
             <b class="text-white">{{ $userCount }}</b> Total Users
         </span>
@@ -31,9 +33,9 @@
         <span>
             <b class="text-white">{{ $followsCount }}</b> Total Follows
         </span>
-
     </div>
 
+    <!-- The TOP5 shows from our DB and their avg ratings -->
     <h1 class="text-center navButtonNoHover "> TOP 5 Added Shows</h1>
     <hr class="border-2 border-emerald-400 w-full">
     @if (count($popshows) != 0)
@@ -78,6 +80,7 @@
         <h1 class="text-center bg-gray-800 navButtonNoHover">No shows have been added! </h1>
     @endif
 
+    <!-- The avg rating table with the rating difference -->
     <h1 class="bg-emerald-400 text-black p-5  mt-5 mb-1 text-2xl md:mb-2  text-center font-extrabold">Top 5 Shows AVG.
         ratings</h1>
     <div
@@ -97,7 +100,9 @@
         </div>
     </div>
 
+    <!-- The section for admin operations -->
     <div class="">
+        <!-- The list of users for the add/remove admin section -->
         <h1 class=" text-center text-2xl font-extrabold bg-emerald-700">Change Role</h1>
         <div class=" overflow-y-auto scrollbar max-h-[200px] border-r-2 border-emerald-700 bg-gray-900">
             @if (count($users) > 1)
@@ -113,9 +118,7 @@
                                 @else
                                     <i class="fa-solid fa-user mr-5 float-left" style="color: #34d399;"></i>
                                 @endif
-
                             </a>
-
                             <div class="md:float-right grid grid-flow-col md:grid-none justify-center mt-2 md:mt-0">
                                 <form method="POST" action="{{ route('admin.update', $user->id) }}"
                                     class="w-56 text-center border-emerald-400 border-2 rounded-xl text-white inline p-1 ">
@@ -136,11 +139,7 @@
                                     @method('DELETE')
                                     <button class="" type="submit"> Ban User</button>
                                 </form>
-
                             </div>
-
-
-
                         </div>
                     @endif
                 @endforeach
@@ -149,6 +148,7 @@
             @endif
         </div>
 
+        <!-- The list of banned users with the option for unban -->
         <div class="">
             <h1 class=" text-center text-2xl font-extrabold bg-emerald-700">Unban Users</h1>
             <div class=" overflow-y-auto scrollbar max-h-[100px] border-r-2 border-emerald-700 bg-gray-900">
@@ -177,7 +177,7 @@
             </div>
         </div>
 
-
+        <!-- The listing of incoming messages (only the Reports) -->
         <div class="mt-5">
             <h1 class=" text-center text-2xl font-extrabold bg-emerald-700">Reports</h1>
             <div class=" overflow-y-auto scrollbar max-h-[300px] border-r-2 border-emerald-700 bg-gray-900">
@@ -224,6 +224,7 @@
             </div>
         </div>
 
+        <!-- The listing of incoming messages (only the Messages) -->
         <div class="mt-5">
             <h1 class=" text-center text-2xl font-extrabold bg-emerald-700">Messages</h1>
             <div class=" overflow-y-auto scrollbar max-h-[300px] border-r-2 border-emerald-700 bg-gray-900">
@@ -259,15 +260,14 @@
                 @endif
             </div>
         </div>
-
     </div>
-
 </div>
 
-
+<!--footer component -->
 <x-footer>
 </x-footer>
 
+<!-- The script for the horizontal scroll bar -->
 <script>
     const scrollContainer = document.querySelector("#scroll");
 

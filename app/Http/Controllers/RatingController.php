@@ -14,14 +14,16 @@ use Illuminate\Support\Facades\Session;
 class RatingController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of all the ratings made by the authorized user.
      *
      * @return \Illuminate\Http\Response
+     *  shows: the user's favourited shows
+     *  ratings: all of the user's ratings
      */
     public function index()
     {
-        $shows=Auth::user()->shows;
-        $ratings=DB::table('ratings')->where('user_id','=',Auth::id())->where('deleted_at','=',NULL)->orderBy('updated_at', 'desc')->get();
+        $shows=Auth::user()->shows; //get all of the user's shows
+        $ratings=DB::table('ratings')->where('user_id','=',Auth::id())->where('deleted_at','=',NULL)->orderBy('updated_at', 'desc')->get(); //get all the ratings of the user sorted by time of rating
 
         return view('layouts.ratings',[
             "shows" => $shows,
@@ -40,9 +42,16 @@ class RatingController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created rating or modify old one in the database.
      *
      * @param  \Illuminate\Http\Request  $request
+     * $request->showRecord : the id of the show in the database
+     * $request->oldRating : if the episode was already rated than the old rating data should be passed
+     * $request->rating : the rating from 1 to 10
+     * $request->s : the season of the rated episode
+     * $request->e : the number of the episode
+     * $request->step : whether the current progress should be stepped or not
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -95,10 +104,15 @@ class RatingController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * show the ratings of the selected user.
      *
      * @param  \App\Models\Rating  $rating
+     *  id : the id of the user we want the ratings of
+     *
      * @return \Illuminate\Http\Response
+     *  shows: the favourite shows of the given user
+     *  ratings: the ratings of the given user
+     *  user: the username of the given user
      */
     public function show($id)
     {

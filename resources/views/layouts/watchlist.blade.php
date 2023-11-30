@@ -1,20 +1,24 @@
+<!-- Contains the head tag and settings-->
 <x-head>
 </x-head>
 
+<!-- Contains the navbar-->
 <x-navbar>
 </x-navbar>
 
+<!-- Message about an empty watchlist-->
 @if (count($notWatchedShows)==0)
 <x-alertbox primaryText="Oh no! " secondaryText="It seems like you dont have anything on your watchlist now.">
 </x-alertbox>
 @endif
 
 <div class="flex flex-col items-center">
+    <!-- Listing the shows and their next episode to be watched -->
     @foreach ($notWatchedShows as $show)
         <div x-data="{ show: false }"
             class="bg-gray-950 m-5 flex flex-col w-full sm:flex-row md:w-10/12 2card:w-5/6 3card:w-4/6 border-b-2 border-emerald-400 relative">
 
-
+            <!-- An option to turn off spoilers for the show, its on by default -->
             <div @click="show = ! show" class="relative sm:absolute sm:top-2 sm:right-2 sm:grid text-center p-5 sm:p-0 sm:grid-flow-row justify-items-end"
                 style="cursor:pointer">
                 <span  class="mb-2 text-emerald-400 text-lg sm:text-sm md:text-xs">Show Spoilers</span>
@@ -26,6 +30,7 @@
                   </label>
             </div>
 
+            <!-- Informations about the show and the episode -->
             <div class="grid grid-flow-row lg:grid-flow-col">
                 <div class="">
                     <img class=" h-[90%] sm:h-[300px] min-w-[200px] object-cover m-auto mb-0 pb-0"
@@ -63,6 +68,7 @@
                     </div>
                 </div>
                 <div>
+                    <!-- The option to mark the current episode watched and rate it -->
                     <form
                         class="bg-emerald-400 rounded-full text-black text-center p-4 md:transition md:ease-in-out  delay-100 hover:bg-emerald-300 hover:scale-105 w-[40%] m-auto mt-2 mb-2"
                         style="cursor: pointer" action="{{ route('watchlist.show',$show->id) }}" method="GET">
@@ -76,5 +82,6 @@
     @endforeach
 </div>
 
+<!-- The footer component with the footer tag-->
 <x-footer>
 </x-footer>

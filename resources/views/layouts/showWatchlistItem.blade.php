@@ -1,5 +1,8 @@
+<!-- Contains the head tag and settings-->
 <x-head>
 </x-head>
+
+<!-- Contains the navbar-->
 <x-navbar>
 </x-navbar>
 
@@ -7,7 +10,7 @@
     <div
         class="bg-gray-950 m-5 flex flex-col w-full sm:flex-row md:w-10/12 2card:w-5/6 3card:w-4/6 border-b-2 border-emerald-400 relative">
 
-
+        <!-- The poster and the name of the show-->
         <div class="grid grid-flow-row lg:grid-flow-col">
             <div class="">
                 <img class=" h-[90%] sm:h-[300px] min-w-[200px] object-cover m-auto mb-0 pb-0"
@@ -21,7 +24,9 @@
                 </h1>
             </div>
         </div>
+
         <div class="flex flex-grow flex-col ">
+            <!-- The information about the episode the user wants to rate -->
             <div class="flex-grow ml-2">
                 <h2 class="text-center navButtonNoHover text-2xl pb-1">Season
                     {{ $episode->season_number }} Episode
@@ -40,6 +45,7 @@
                     </div>
                 </div>
             </div>
+            <!-- The form to select a rating from 1-10 for the episode, or if the episode was already rated seting a the old value to default-->
             <form action="{{ route('ratings.store') }}" method="POST">
                 @csrf
                 @method('POST')
@@ -95,5 +101,7 @@
 
     </div>
 </div>
+
+<!-- The footer component with the footer tag-->
 <x-footer>
 </x-footer>

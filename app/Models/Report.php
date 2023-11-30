@@ -10,7 +10,7 @@ class Report extends Model
 {
     use HasFactory,SoftDeletes;
 
-    protected $fillable = [
+    protected $fillable = [ // These are mass assignable
         'user_id',
         'message',
         'type',
@@ -21,6 +21,12 @@ class Report extends Model
     protected $hidden = [
     ];
 
+
+    /**
+    *  Setting the relationships between diferent models
+    */
+
+    // $report->user gives back the user who wrote the message
     public function user() {
         return $this->belongsTo(User::class);
     }

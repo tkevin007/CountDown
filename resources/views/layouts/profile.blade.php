@@ -1,13 +1,18 @@
+<!-- Contains the head tag and settings-->
 <x-head>
 </x-head>
+
+<!-- Contains the navbar-->
 <x-navbar>
 </x-navbar>
 
+<!-- A message about the succes of a new follow-->
 @if (Session::has('followed'))
     <x-alertbox primaryText="Success! " secondaryText="You started following {{ Session::get('followed') }}">
     </x-alertbox>
 @endif
 
+<!-- A message about the success of unfollow-->
 @if (Session::has('unfollowed'))
     <x-alertbox primaryText="Success! " secondaryText="You stopped following {{ Session::get('unfollowed') }}">
     </x-alertbox>
@@ -15,6 +20,7 @@
 
 <div class="bg-gray-950 md:w-5/6 w-full m-auto mt-0 border-4 border-black">
 
+    <!-- The header of the profile, with the name and options to follow or unfollow-->
     <h1 class="bg-emerald-400 text-black p-5 mb-1 text-2xl md:mb-2  ">
         @if (strcmp($user->role, 'Admin') == 0)
             <i class="fa-solid fa-crown mr-5 float-left" style="color: #000000;"></i>
@@ -43,8 +49,6 @@
             @endif
             <div>
     </h1>
-
-
     <h1 class=" text-black p-2 mb-2 text-2xl grid justify-items-center content-center md:hidden">
         @if ($allowFollow)
             <form action="{{ route('follows.store') }}" method="POST"
@@ -67,8 +71,8 @@
     </h1>
 
 
+    <!-- Some stats about the user-->
     <div class="flex flex-row flex-wrap justify-around text-white mt-2 md:mt-0">
-
         <span>
             <b class="text-white">{{ $user->shows->count() }}</b> Shows
         </span>
@@ -87,6 +91,7 @@
         </span>
     </div>
 
+    <!-- A list of the user's shows with some details about it-->
     <h1 class="text-center navButtonNoHover ">Favorite Shows</h1>
     <hr class="border-2 border-emerald-400 w-full">
     @if (count($user->shows) != 0)
@@ -121,12 +126,14 @@
         </div>
     @else
         <h1 class="text-center bg-gray-800 navButtonNoHover">{{ $user->username }} doesn't have any shows added </h1>
-
     @endif
 
     <br>
+
     <div class="flex flex-row flex-wrap">
         <div class="w-full md:w-auto">
+
+            <!-- A list of the people who the profile's user is following -->
             <div class=" text-white md:min-w-[300px] md:max-w-[300px] ">
                 <h1 class=" text-center text-black text-2xl font-extrabold bg-emerald-700">Follows</h1>
                 <div class=" overflow-y-auto scrollbar max-h-[200px] border-r-2 border-emerald-700 bg-gray-900">
@@ -150,6 +157,8 @@
                     @endif
                 </div>
             </div>
+
+            <!-- A list of the people who follow the profile's user -->
             <div class="text-white  md:min-w-[300px] md:max-w-[300px]">
                 <h1 class=" text-center text-black text-2xl font-extrabold bg-emerald-700 ">Followed By</h1>
                 <div
@@ -175,6 +184,8 @@
                 </div>
             </div>
         </div>
+
+        <!-- The last 3 rating of the user with some informations about the episode that they rated -->
         <div class="grow text-center w-1/3">
             <h1 class=" text-center text-black text-2xl font-extrabold bg-emerald-700 ">Ratings</h1>
 
@@ -219,6 +230,8 @@
                         ratings yet </h1>
                 @endif
             </div>
+
+            <!-- Option to see all of the user's ratings -->
             <a href="{{ route('ratings.show', $user->id) }}">
                 <h2 class="w-full md:w-auto md:transition md:ease-in-out  delay-100 inline-block navButtonNoHover text-2xl bg-emerald-400 hover:bg-emerald-300 md:hover:scale-110 text-black font-extrabold rounded-full my-2"
                     style="cursor: pointer"> See All...</h2>
@@ -229,10 +242,12 @@
 </div>
 
 
-
+<!-- The footer component with the footer tag-->
 <x-footer>
 </x-footer>
 
+
+<!-- The script for the horizontal scroll bar -->
 <script>
     const scrollContainer = document.querySelector("#scroll");
 

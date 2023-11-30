@@ -13,7 +13,7 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable,SoftDeletes;
 
-    protected $fillable = [
+    protected $fillable = [ //These values are mass assignable
         'username',
         'email',
         'password',
@@ -29,18 +29,27 @@ class User extends Authenticatable
     ];
 
 
+
+    /**
+    *  Setting the relationships between diferent models
+    */
+
+    // $user->follows gives back all users who this user is following
     public function follows() {
         return $this->hasMany(Follow::class);
     }
 
+    // $user->shows gives back the favorited shows of the user
     public function shows() {
         return $this->hasMany(Show::class);
     }
 
+    // $user->ratings gives back all the ratings of this user
     public function ratings() {
         return $this->hasMany(Rating::class);
     }
 
+    // $user->reports gives back all the messages sent by this user
     public function reports() {
         return $this->hasMany(Report::class);
     }

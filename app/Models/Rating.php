@@ -10,7 +10,7 @@ class Rating extends Model
 {
     use HasFactory,SoftDeletes;
 
-    protected $fillable = [
+    protected $fillable = [ // These are mass assignable
         'season_number',
         'episode_number',
         'episode_name',
@@ -23,9 +23,15 @@ class Rating extends Model
     protected $hidden = [
     ];
 
+    /**
+    *  Setting the relationships between diferent models
+    */
+
+    // $rating->show gives back the show this rating belongs to
     public function show() {
         return $this->belongsTo(Show::class);
     }
+    // $rating->user gives back the user who's rating this is
     public function user() {
         return $this->belongsTo(User::class);
     }

@@ -1,14 +1,19 @@
+<!-- Contains the head tag and settings-->
 <x-head>
 </x-head>
+
+<!-- Contains the navbar-->
 <x-navbar>
 </x-navbar>
 
 
+<!-- A message about the succes of a new favourited show-->
 @if (Session::has('followed'))
     <x-alertbox primaryText="Success! " secondaryText="You started following {{ Session::get('followed') }}">
     </x-alertbox>
 @endif
 
+<!-- A message about the succes of a removing the favourited show-->
 @if (Session::has('unfollowed'))
     <x-alertbox primaryText="Success! " secondaryText="You stopped following {{ Session::get('unfollowed') }}">
     </x-alertbox>
@@ -16,6 +21,9 @@
 
 <div class="bg-gray-950 2card:w-4/5 3card:w-4/6 w-full m-auto mt-0 border-4 border-black">
 
+    <!-- The heading of the show, with options to add to favourites or remove/edit it if already added-->
+
+    <!-- SMALL SCREEN MODE -->
     <h1 class="bg-emerald-400 text-black p-5 md:mb-2 text-2xl  ">{{ $show->name }}
         <div class="hidden md:inline">
             @if (!$doFollow)
@@ -25,7 +33,7 @@
                     @csrf
                     @method('POST')
                     <input hidden name="show_id" id="show_id" value="{{ $show->id }}">
-                    Add To Favorites <i class="fa-solid fa-add" style="color: #34d399;"></i>
+                    Add To Favourites <i class="fa-solid fa-add" style="color: #34d399;"></i>
                 </form>
             @elseif($doFollow)
                 <form action="{{ route('shows.destroy', $followRecordId) }}" method="POST"
@@ -33,7 +41,7 @@
                     style="cursor: pointer" onclick="this.submit()">
                     @csrf
                     @method('DELETE')
-                    Remove from Favorites <i class="fa-solid fa-trash" style="color: #34d399;"></i>
+                    Remove from Favourites <i class="fa-solid fa-trash" style="color: #34d399;"></i>
                 </form>
                 <form action="{{ route('shows.edit', $followRecordId) }}" method="GET"
                     class="transition ease-in-out  delay-100 hover:scale-110 hover:bg-gray-900 float-right bg-gray-950 rounded-lg p-2 mx-2 text-emerald-400 prevent-select"
@@ -46,7 +54,7 @@
 
         </div>
     </h1>
-
+    <!-- LARGE SCREEN MODE -->
     <h1 class=" m-2 text-white mb-2 text-2xl grid justify-items-center content-center md:hidden">
         @if (!$doFollow)
             <form action="{{ route('shows.store') }}" method="POST"
@@ -55,7 +63,7 @@
                 @csrf
                 @method('POST')
                 <input hidden name="show_id" id="show_id" value="{{ $show->id }}">
-                Add To Favorites <i class="fa-solid fa-add" style="color: #34d399;"></i>
+                Add To Favourites <i class="fa-solid fa-add" style="color: #34d399;"></i>
             </form>
         @elseif($doFollow)
             <div class="flex flex-row">
@@ -64,7 +72,7 @@
                     style="cursor: pointer" onclick="this.submit()">
                     @csrf
                     @method('DELETE')
-                    Remove from Favorites <i class="fa-solid fa-trash" style="color: #34d399;"></i>
+                    Remove from Favourites <i class="fa-solid fa-trash" style="color: #34d399;"></i>
                 </form>
                 <form action="{{ route('shows.edit', $followRecordId) }}" method="GET"
                     class="border-emerald-400 border-2  text-center transition ease-in-out delay-100 hover:scale-110 hover:bg-gray-900 bg-gray-950 rounded-lg p-2 ml-4 text-emerald-400 prevent-select"
@@ -77,7 +85,7 @@
         @endif
     </h1>
 
-
+    <!-- A lot of information about the show -->
     <div class="grid grid-flow-row md:grid-flow-col text-white w-full">
         <div class="grid justify-items-center mb-5 md:mr-3">
             <img class=" h-[400px] min-w-[266px] object-cover"
@@ -151,7 +159,7 @@
         </table>
     </div>
 
-
+    <!-- Displaying the users, who favourited this show -->
     <div class="w-full md:flex md:flex-row">
         <div class=" text-white md:min-w-[300px] md:max-w-[300px] pb-5 md:pb-0 ">
             <h1 class=" text-center text-black text-2xl font-extrabold bg-emerald-700">Users following</h1>
@@ -202,9 +210,11 @@
 
 
 
+<!-- The footer component with the footer tag-->
 <x-footer>
 </x-footer>
 
+<!-- The script for the horizontal scroll bar -->
 <script>
     const scrollContainer = document.querySelector("#scroll");
 
@@ -231,5 +241,4 @@
 </script>
 
 </body>
-
 </html>

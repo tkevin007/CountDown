@@ -1,15 +1,19 @@
+<!-- Contains the head tag and settings-->
 <x-head>
 </x-head>
 
+<!-- Contains the navbar-->
 <x-navbar>
 </x-navbar>
 
+<!-- Message about the successfull edit of a rating-->
 @if (Session::has('change'))
     <x-alertbox primaryText="{!! Session::get('change') !!}">
     </x-alertbox>
 
 @endif
 
+<!-- Only display a name if the rating page doesent belong to the auth user-->
 @if(isset($user))
 <div>
     <h1 class="bg-emerald-400 text-black p-5 mb-2 text-2xl  "><i class="fa-solid fa-user mr-5"
@@ -22,6 +26,7 @@
 <div x-data="{ filter: 0 }"
     class="grid grid-flow-row md:grid-flow-col md:grid-cols-[150px_auto] 2card:grid-cols-[350px_auto]">
 
+    <!-- The left side of the page with filtering feature -->
     <div x-data="{ open: false }" @mouseleave="open=false" style="user-select: none;"
         class="text-white bg-slate-900 border-b-2 border-emerald-400 md:border-b-0 md:border-l-4">
 
@@ -35,7 +40,7 @@
                 class=" text-center text-2xl md:max-w-[400px] p-3 md:p-5 " style="cursor: pointer;">
                 Show All
             </p>
-
+            <!-- Listing all favourited shows of the user -->
             @foreach ($shows as $show)
                 <p x-on:click="filter='{{$show->TMDB_show_id}}'"
                     :class="filter == '{!! $show->TMDB_show_id !!}' ? 'bg-emerald-400 text-black text-lg font-extrabold hover:none' :
@@ -45,6 +50,7 @@
         </div>
     </div>
 
+    <!-- The right side of the page with the profile's ratings, can be filtered -->
     <div class="">
         @foreach ($ratings as $rating)
             <div :class="[filter == '{{ $rating->TMDB_show_id }}' || filter == 0 ? 'block' : 'hidden']"
@@ -64,6 +70,8 @@
                         <p class="text-sm 2card:text-base">Season {{ $rating->season_number }} Episode
                             {{ $rating->episode_number }}</p>
 
+                            <!-- Option to change the rating if the profile is the auth user's-->
+                            @if (!isset($user))
                            <form action="{{route('watchlist.show',$rating->TMDB_show_id)}}" method="GET">
                             @csrf
                             @method('GET')
@@ -72,6 +80,7 @@
                             <input hidden name="s" value="{{$rating->season_number}}"/>
                             <input hidden name="step" value='0' />
                             </form>
+                            @endif
                     </div>
                     <div class="flex-grow ">
                         <p class="text-justify text-sm">{{ $rating->episode_desc }}</p>
@@ -90,13 +99,14 @@
 
 </div>
 
-@elseif (isset($user))
 
+@elseif (isset($user))
+<!-- Message if there are no ratings yet on someone else's profile-->
 <x-alertbox primaryText="{{$user}} haven't rated any episodes yet!" secondaryText="You can start rating episodes on your watchlist page!" closable="false">
 </x-alertbox>
 
 @else
-
+<!-- Message if there are no ratings yet on the auth user's profile-->
 <x-alertbox primaryText="You haven't rated any episodes yet!" secondaryText="You can start rating episodes on your watchlist page!" closable="false">
 </x-alertbox>
 
@@ -104,6 +114,6 @@
 @endif
 
 
-
+<!-- The footer component with the footer tag-->
 <x-footer>
 </x-footer>

@@ -1,15 +1,18 @@
+<!-- Contains the head tag and settings-->
 <x-head>
 </x-head>
 
+<!-- Contains the navbar-->
 <x-navbar>
 </x-navbar>
 
-
+<!-- Displaying the follows of the user if there is any-->
 @if (count($followedUsers) != 0)
 
     <div x-data="{ filter: 0 }"
         class="grid grid-flow-row md:grid-flow-col md:grid-cols-[150px_auto] 2card:grid-cols-[350px_auto]">
 
+        <!-- The list of followed users, acting as filters for the right side of the page showing the ratings -->
         <div x-data="{ open: false }" @mouseleave="open=false" style="user-select: none;"
             class="text-white bg-slate-900 border-b-2 border-emerald-400 md:border-b-0 md:border-l-4">
 
@@ -24,6 +27,7 @@
                     Show All
                 </p>
 
+                <!-- The users who are followed by the Auth user -->
                 @foreach ($followedUsers as $followedUser)
                     <div x-on:click="filter='{{ $followedUser->id }}'"
                         :class="filter == '{!! $followedUser->id !!}' ?
@@ -47,8 +51,8 @@
 
         <div class="">
             @if (count($followHistory) != 0)
-
                 @foreach ($followHistory as $historyLog)
+                <!-- The right side of the page with the history of the Auth user's followed account's ratings ordered by time of rating, with optional filter options -->
                     <div :class="[filter == '{{ $historyLog->user_id }}' || filter == 0 ? 'block' : 'hidden', !hover ?
                         'bg-gray-950 text-white' : 'bg-gray-800'
                     ]"
@@ -91,6 +95,7 @@
                 @endforeach
 
             @else
+                <!-- A message if the user's followers haven't rated anything yet, so there is nothing to show on this page -->
                 <x-alertbox primaryText="None of your followed users rated any episodes yet!"
                  closable="false">
                 </x-alertbox>
@@ -99,6 +104,7 @@
 
     </div>
 @else
+    <!-- A message if there are no follows associated with the user-->
     <x-alertbox primaryText="You don't follow anyone!"
         secondaryText="You can following users with the plus icon in the bottom right corner." closable="false">
     </x-alertbox>
@@ -106,12 +112,12 @@
 
 @endif
 
+<!-- The add new follow button -->
 <a href="{{ route('follows.create') }}" class=" z-30 fixed right-5 bottom-2 text-7xl" style="cursor: pointer;">
     <i
         class="fa-solid fa-circle-plus text-emerald-400 hover:text-emerald-500 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300"></i>
 </a>
 
+<!-- The footer component with the footer tag-->
 <x-footer>
 </x-footer>
-
-<script></script>

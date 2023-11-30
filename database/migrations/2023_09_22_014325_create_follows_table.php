@@ -14,10 +14,10 @@ class CreateFollowsTable extends Migration
     public function up()
     {
         Schema::create('follows', function (Blueprint $table) {
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('follow_id');
-            $table->softDeletes();
-            $table->timestamps();
+            $table->unsignedBigInteger('user_id'); // The user's id who started following
+            $table->unsignedBigInteger('follow_id'); // The user's id who is being followed
+            $table->softDeletes(); // Handles the soft deletion of the records
+            $table->timestamps(); // Adds Created_at, Updated_at columns
         });
     }
 

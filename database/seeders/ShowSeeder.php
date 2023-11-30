@@ -20,7 +20,7 @@ class ShowSeeder extends Seeder
         $users = User::All();
 
         foreach ($users as $u){
-            $userRandShowIds = array_rand($trendingShowIds,rand(5,8));
+            $userRandShowIds = array_rand($trendingShowIds,rand(2,5));
 
             foreach($userRandShowIds as $showId){
                 $show = TMDB_api::getShowDetailsById($trendingShowIds[$showId]);

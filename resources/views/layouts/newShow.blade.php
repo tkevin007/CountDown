@@ -1,14 +1,12 @@
+<!-- Contains the head tag and settings-->
 <x-head>
 </x-head>
 
+<!-- Contains the navbar-->
 <x-navbar>
 </x-navbar>
 
-@if ($results == [])
-<div class="h-[80vh]" style="background-size: 100% 100vh; background-image: url({{asset('media/bg.png')}}); background-size:cover; background-repeat:repeat-y">
-@endif
-
-
+<!-- The form to search the TMDB database-->
 <div class="md:grid md:grid-flow-row md:grid-cols-1 md:justify-items-center pb-6">
 
     <form id="searchForm" class="text-emerald-400 bg-gray-950 p-5 md:w-[550px] w-full  border-t-2 border-emerald-400 pt-0" method="GET"
@@ -27,9 +25,9 @@
 </div>
 
 
-
 @if ($results != [])
 
+<!-- The results get displayed with some infos about the shows with option to add them to the favourites if not already added-->
     <div class="relative text-white">
         <div
             class="grid w-full grid-flow-row grid-cols-2 md:grid-cols-4 2card:grid-cols-5 3card:grid-cols-6 justify-items-center m-auto gap-2">
@@ -71,7 +69,7 @@
         </div>
     </div>
 
-
+<!-- Pagination controls if there are more than 20 results there will be multiple pages to paginate through-->
     <div class=" text-center text-emerald-400 ">
         <div class="inline-block  m-2 md:m-10 p-5 border-2 border-emerald-400 bg-gray-950 ">
 
@@ -104,9 +102,10 @@
 
 @endif
 
-@if ($results == [])
-</div>
-@endif
 
+
+
+<!-- The footer component with the footer tag-->
 <x-footer>
 </x-footer>
+

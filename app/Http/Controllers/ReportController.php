@@ -21,7 +21,7 @@ class ReportController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new message.
      *
      * @return \Illuminate\Http\Response
      */
@@ -31,25 +31,37 @@ class ReportController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created message in the database.
      *
      * @param  \Illuminate\Http\Request  $request
+     *  $request->message: the message we want to store
+     *  $request->type: the type of message we need to store (Message or Report)
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
+        //Checking authorization
         if(!Auth::hasUser())
         abort(401);
 
+        //If there are no message abort
+        if($request->message==null)
+        abort(400);
+
+        //Creating new report and setting the values
         $report = new Report;
         $report->user_id=Auth::id();
         $report->message = $request->message;
         $report->type = $request->type;
         $report->read=0;
         $report->status="Unfixed";
+        //Saving the new report to the database
         $report->save();
 
+        //Creating a flash message about the success of the operation
         Session::flash('sent',"Your Message has been sent!");
+
+        //Redirect to the mainpage
         return redirect()-> route("countDown.index");
     }
 
@@ -76,18 +88,21 @@ class ReportController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Toggle the Read or the Status of the specified report depending on the type of the message
      *
      * @param  \Illuminate\Http\Request  $request
+     * Required for the resourceController
      * @param  \App\Models\Report  $report
+     *  $report: the report we want to toggle
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Report $report)
     {
+        //Check authentication
         if(strcmp(Auth::user()->role,"Admin")!=0)
         abort(401);
 
-
+        //Toggle the fields according to the input state, and creating a flash message about the success of the operation
         if( strcmp($report->type,"Report")==0 && strcmp($report->status,"Unfixed")==0){
             $report->status="Fixed";
             Session::flash('adminOperation',($report->user->username??"<Deleted User>")."'s Bug report has been marked as fixed!");
@@ -104,12 +119,12 @@ class ReportController extends Controller
             Session::flash('adminOperation',($report->user->username??"<Deleted User>")."'s Message has been marked as Unread!");
         }
 
-
+        //The authenticated user will be set as the last user to modify the message
         $report->lastModifier=Auth::id();
-
+        //Saving the changes
         $report->save();
 
-
+        //Redirects back to the admin page
         return redirect()->route('admin.index');
     }
 

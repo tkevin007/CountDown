@@ -8368,6 +8368,44 @@ select{
   --tw-backdrop-saturate:  ;
   --tw-backdrop-sepia:  ;
 }
+.container{
+  width: 100%;
+}
+@media (min-width: 640px){
+  .container{
+    max-width: 640px;
+  }
+}
+@media (min-width: 768px){
+  .container{
+    max-width: 768px;
+  }
+}
+@media (min-width: 1024px){
+  .container{
+    max-width: 1024px;
+  }
+}
+@media (min-width: 1060px){
+  .container{
+    max-width: 1060px;
+  }
+}
+@media (min-width: 1280px){
+  .container{
+    max-width: 1280px;
+  }
+}
+@media (min-width: 1536px){
+  .container{
+    max-width: 1536px;
+  }
+}
+@media (min-width: 1600px){
+  .container{
+    max-width: 1600px;
+  }
+}
 .navButton{
   border-top-left-radius: 0.5rem;
   border-top-right-radius: 0.5rem;
@@ -8409,6 +8447,9 @@ th{
 td{
   padding-left: 0.5rem;
   padding-right: 0.5rem;
+}
+.visible{
+  visibility: visible;
 }
 .fixed{
   position: fixed;
@@ -8642,6 +8683,9 @@ td{
 .grid{
   display: grid;
 }
+.contents{
+  display: contents;
+}
 .hidden{
   display: none;
 }
@@ -8677,9 +8721,6 @@ td{
 }
 .h-\[400px\]{
   height: 400px;
-}
-.h-\[80vh\]{
-  height: 80vh;
 }
 .h-\[90\%\]{
   height: 90%;

@@ -1,6 +1,8 @@
+<!-- Contains the head tag and settings-->
 <x-head>
 </x-head>
 
+<!-- Contains the navbar-->
 <x-navbar>
 </x-navbar>
 
@@ -10,8 +12,8 @@
         <div x-data="{ deleteScreen: false }"
             class=" relative 2card:max-w-[1200px] group text-start md:text-justify m-2 flex border border-t-4 border-x-gray-900 border-b-gray-900 border-emerald-400 rounded-br-3xl bg-gray-950  hover:border-b-emerald-400 hover:border-x-emerald-400 flex-row">
 
+            <!-- The container with information about the show and a form to change progress-->
             <div class=" p-3">
-
                 <img :class="{ 'blur-sm': deleteScreen }" class=" w-[200px] md:w-[250px] float-left p-0 mr-5 mb-5"
                 src="https://image.tmdb.org/t/p/w500{{ $TMDB_api_show->poster_path }}"
                 alt="{{ $TMDB_api_show->name }}'s poster" />
@@ -26,7 +28,7 @@
                     <i class=" fa-solid fa-trash fa-2x" style="color: #34d399;"></i>
                 </span>
 
-
+                <!-- Clicking the trash icon in the top left corner makes this visible, deletion screen to remove the show from favourites-->
                 <div x-show="deleteScreen"
                     class="z-10 navButtonNoHover blur-none absolute right-0 top-1/4 border-2 border-emerald-400 border-r-0 bg-gray-900">
                     <p>Would you like to delete this show from your favourites?
@@ -43,6 +45,7 @@
                     </div>
                 </div>
 
+                <!-- The form to change the current progress of the user with the show-->
                 <div :class="{'blur-sm':deleteScreen}" class="m-0">
                     <form method="POST" class="navButtonNoHover mt-5 p-0 pl-5 md:text-start text-center" name="form1" id="form1"
                         action="{{route('shows.update',$id)}}">
@@ -75,9 +78,12 @@
     </div>
 </div>
 
+<!-- The footer component with the footer tag-->
 <x-footer>
 </x-footer>
 
+
+<!-- A script to correctily generate the number of seasons and the number of episodes in the selected season-->
 <script>
     let a = {!! collect($TMDB_api_show) !!};
     let s = [];
@@ -86,6 +92,7 @@
     let current_s = {!! $current_season !!};
     let current_e = {!! $current_episode !!};
 
+    //getting the number of seasons and the related number of episodes
     a['seasons'].forEach(element => {
         if (element['season_number']) {
             s.push(element['season_number']);
@@ -97,8 +104,7 @@
         var subjectSel = document.getElementById("season");
         var topicSel = document.getElementById("episode");
 
-
-        console.log(e);
+        //adding the options to the form
         for (var x in s) {
             if (s[x] == current_s) {
                 subjectSel.add(new Option(s[x], s[x], true, true));
@@ -117,6 +123,7 @@
             }
         }
 
+        //Refresh the dropdown if the season gets changed
         subjectSel.onchange = function() {
             //empty Chapters- and Topics- dropdowns
             topicSel.length = 1;

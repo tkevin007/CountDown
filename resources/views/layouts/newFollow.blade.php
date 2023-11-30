@@ -1,12 +1,15 @@
+<!-- Contains the head tag and settings-->
 <x-head>
 </x-head>
 
+<!-- Contains the navbar-->
 <x-navbar>
 </x-navbar>
 
 <div>
     <div class="md:grid md:grid-flow-row md:grid-cols-1 md:justify-items-center pb-6">
 
+        <!-- The search bar to look for usernames -->
         <div id="searchForm"
             class="text-emerald-400 bg-gray-950 p-5 md:w-[550px] w-full  border-t-2 border-emerald-400 pt-0">
             <label for="searchtext" class="block text-lg mt-2">Username</label>
@@ -20,10 +23,12 @@
         </div>
     </div>
 
+    <!-- The container to show result by default it shows all-->
     <div id="results"
         class="grid grid-cols-1 md:grid-cols-2 2card:grid-cols-3 3card:grid-cols-4 justify-items-center">
         @foreach ($users as $user)
             @if ($user->id != Auth::id())
+                <!-- Each user's card containing the some info about them-->
                 <div
                     class="relative text-white bg-gray-950 m-5 hover:bg-slate-950 w-full md:w-[48vw] 2card:w-[31vw] 3card:w-[24vw]
                         rounded-br-xl">
@@ -73,6 +78,7 @@
 </div>
 
 <script>
+    //the script to make the searchbar work
     $(document).ready(function() {
         $("#searchtext").on("keyup", function() {
             var value = $(this).val().toLowerCase();
@@ -83,5 +89,7 @@
     });
 </script>
 
+
+<!-- The footer component with the footer tag-->
 <x-footer>
 </x-footer>

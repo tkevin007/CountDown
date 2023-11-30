@@ -1,13 +1,16 @@
+
+<!-- Displaying Informations about a show-->
 <div
   x-data="{deleteScreen:false,editScreen:false}"
   @mouseleave="deleteScreen=false,editScreen=false"
   class=" md:w-[600px] 2card:w-auto group relative text-start md:text-justify m-2 flex border border-t-4 border-x-gray-900 border-b-gray-900 border-emerald-400 rounded-br-3xl bg-gray-950  hover:border-b-emerald-400 hover:border-x-emerald-400 flex-row">
   <img
-  :class="{'blur-sm':deleteScreen || editScreen}"
-    class="max-w-[150px] h-[225px] md:w-[200px] object-cover "
-    src="https://image.tmdb.org/t/p/w500{{$poster}}"
-    alt="{!!$title!!}'s poster"
-    onerror="this.src='{{asset('media/placeholder.png')}}'"/>
+    :class="{'blur-sm':deleteScreen || editScreen}"
+        class="max-w-[150px] h-[225px] md:w-[200px] object-cover "
+        src="https://image.tmdb.org/t/p/w500{{$poster}}"
+        alt="{!!$title!!}'s poster"
+        onerror="this.src='{{asset('media/placeholder.png')}}'"/>
+
   <div class="flex justify-items-end flex-col p-6">
     <h5
     :class="{'blur-sm':deleteScreen || editScreen}"
@@ -33,7 +36,7 @@
 
         </a>
 
-
+        <!-- The remove screen -->
         <div x-show="deleteScreen" class="navButtonNoHover blur-none absolute border-2 border-emerald-400 border-r-0 bg-gray-900">
             <p>Would you like to delete this show from your favourites?<p>
                 <div class="my-2 flex justify-center">
@@ -46,6 +49,7 @@
                 </div>
         </div>
 
+        <!-- The edit screen -->
         <div x-show="editScreen" class="navButtonNoHover blur-none absolute top-10 right-0 border-2 border-emerald-400 border-r-0 bg-gray-900">
             <p>Do you want to edit this show?</p>
             <div class="my-2 flex justify-center">

@@ -1,6 +1,8 @@
+<!-- Contains the head tag and settings-->
 <x-head>
 </x-head>
 
+<!-- Contains the navbar-->
 <x-navbar>
 </x-navbar>
 
@@ -10,6 +12,7 @@
             class=" relative 2card:max-w-[1200px] group text-start md:text-justify m-2  border border-t-4 border-x-gray-900 border-b-gray-900 border-emerald-400 rounded-br-3xl bg-gray-950  hover:border-b-emerald-400 hover:border-x-emerald-400">
             <div class=" pr-3">
 
+                <!-- The form to send a message to the administrators -->
                 <div class="m-0">
                     <form method="POST" class="navButtonNoHover mt-5 p-0 pl-5 md:text-start text-center" name="form1"
                         id="form1" action="{{ route('report.store') }}">
@@ -28,7 +31,7 @@
                                 <label class=" flex text-sm md:text-lg navButtonNoHover" for="type">Message
                                     Type:</label>
                                 <select class=" md:w-56 w-full text-emerald-400 bg-gray-800" name="type"
-                                    id="type">
+                                    id="type" required>
                                     <option value="Report" selected>Report</option>
                                     <option value="Message">Message</option>
                                 </select>
@@ -36,7 +39,7 @@
                         </div>
                             <div class="mb-2">
                                 <label class="flex text-sm md:text-lg navButtonNoHover" for="message">Message:</label>
-                                <textarea class="m-auto w-full min-h-[150px] text-emerald-400 bg-gray-800" value="" name="message" id="message"></textarea>
+                                <textarea required class="m-auto w-full min-h-[150px] text-emerald-400 bg-gray-800" value="" name="message" id="message"></textarea>
                             </div>
                         <div class="text-end pb-2">
                             <input
@@ -51,5 +54,6 @@
     </div>
 </div>
 
+<!-- The footer component with the footer tag-->
 <x-footer>
 </x-footer>
